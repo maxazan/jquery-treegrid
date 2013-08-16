@@ -41,3 +41,14 @@ test("isLast()", function() {
   ok($('#node-1-1-2-1').treegrid('isLast') === true, "Last test!");
   ok($('#node-1-2').treegrid('isLast') === false, "Not Last test!");
 });
+
+test("expand(), collapse(), isExpanded(), isCollapsed()", function() {
+  $('#node-1').treegrid('expand');
+  ok($('#node-1').treegrid('isExpanded') === true, "Expanded");
+  ok($('#node-1').hasClass('treegrid-expanded'), "Expanded class");
+  $('#node-1').treegrid('collapse');
+  ok($('#node-1').treegrid('isCollapsed') === true, "Collapsed");
+  ok($('#node-1').hasClass('treegrid-collapsed'), "Collapsed class");
+  $('#node-1').find('.treegrid-expander').click();
+  ok($('#node-1').treegrid('isExpanded') === true, "Expanded after click simulate");
+});
