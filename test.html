@@ -11,45 +11,48 @@
     <div id="qunit-fixture"></div>
     <script src="tests/qunit-1.12.0.js"></script>
     <script src="tests/tests.js"></script>
-    <table class='tree' border="1" cellpadding="0" cellspacing="0">
+    <table id='tree-1' border="1" cellpadding="0" cellspacing="0">
       <tr>
         <th>1</th><th>2</th>
       </tr>
-      <tr class="root treegrid-1">
+      <tr class="treegrid-1" id="node-1">
         <td>1</td><td>Simple text of ...</td>
       </tr>
-      <tr class="treegrid-2 treegrid-parent-1">
+      <tr class="treegrid-2 treegrid-parent-1" id="node-1-1">
         <td>1.1</td><td>Simple text of ...</td>
       </tr>
-      <tr class='treegrid-3 treegrid-parent-2'  id="last-test-2">
+      <tr class='treegrid-3 treegrid-parent-2' id="node-1-1-1">
         <td>1.1.1</td><td>Simple text of ...</td>
       </tr>
-      <tr class='treegrid-9 treegrid-parent-2'>
+      <tr class='treegrid-9 treegrid-parent-2' id="node-1-1-2">
         <td>1.1.2</td><td>Simple text of ...</td>
       </tr>
-      <tr class='treegrid-10 treegrid-parent-9' id="last-test-1">
+      <tr class='treegrid-10 treegrid-parent-9' id="node-1-1-2-1">
         <td>1.1.2.1</td><td>Simple text of ...</td>
       </tr>
-      <tr class='root treegrid-4 treegrid-parent-1'>
+      <tr class='treegrid-4 treegrid-parent-1' id="node-1-2">
         <td>1.2</td><td>Simple text of ...</td>
       </tr>
-      <tr class='root treegrid-5 treegrid-parent-1'>
+      <tr class='treegrid-5 treegrid-parent-1' id="node-1-3">
         <td>1.3</td><td>Simple text of ...</td>
       </tr>
-      <tr class='treegrid-6 treegrid-parent-5'>
+      <tr class='treegrid-6 treegrid-parent-5' id="node-1-3-1">
         <td>1.3.1</td><td>Simple text of ...</td>
       </tr>
-      <tr class='root treegrid-7 treegrid-parent-1'>
+      <tr class='treegrid-7 treegrid-parent-1' id="node-1-4">
         <td>1.4</td><td>Simple text of ...</td>
       </tr>
-      <tr class='treegrid-8 treegrid-parent-7'>
+      <tr class='treegrid-8 treegrid-parent-7' id="node-1-4-1">
         <td>1.4.1</td><td>Simple text of ...</td>
+      </tr>
+      <tr class="treegrid-11" id="node-2">
+        <td>2</td><td>Simple text of ...</td>
       </tr>
     </table>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="js/jquery.treegrid.js"></script>
     <script>
-      $(".tree").treegrid({});
+      $("#tree-1").treegrid({});
     </script>
   </body>
 </html>
