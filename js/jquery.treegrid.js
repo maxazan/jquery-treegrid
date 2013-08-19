@@ -196,20 +196,6 @@
       }
     },
     /**
-     * Expand if collapsed, Collapse if expanded
-     * 
-     * @returns {Node}
-     */
-    toggle: function() {
-      var $this = $(this);
-      if ($this.treegrid('isExpanded')) {
-        $this.treegrid('collapse');
-      } else {
-        $this.treegrid('expand');
-      }
-      return $this;
-    },
-    /**
      * Expand node
      * 
      * @returns {Node}
@@ -234,6 +220,20 @@
         $this.removeClass('treegrid-expanded');
         $this.addClass('treegrid-collapsed');
         $this.treegrid('render');
+      }
+      return $this;
+    },
+    /**
+     * Expand if collapsed, Collapse if expanded
+     * 
+     * @returns {Node}
+     */
+    toggle: function() {
+      var $this = $(this);
+      if ($this.treegrid('isExpanded')) {
+        $this.treegrid('collapse');
+      } else {
+        $this.treegrid('expand');
       }
       return $this;
     },
