@@ -6,9 +6,11 @@
     <title>Jquery-treegrid by maxazan</title>
 
     <link rel="stylesheet" href="styles.css">
-	<link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
-	<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
-	<script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
+    <link rel="stylesheet" href="css/jquery.treegrid.css">
+    <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -17,13 +19,13 @@
   <body>
     <div class="wrapper">
 
-      
-<h1>TreeGrid jQuery plugin</h1>
-        <ul class="download">
-          <li><a href="https://github.com/maxazan/jquery-treegrid/zipball/master">Download <br><strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/maxazan/jquery-treegrid/tarball/master">Download <br><strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/maxazan/jquery-treegrid">View On <br><strong>GitHub</strong></a></li>
-        </ul>
+
+      <h1>TreeGrid jQuery plugin</h1>
+      <ul class="download">
+        <li><a href="https://github.com/maxazan/jquery-treegrid/zipball/master">Download <br><strong>ZIP File</strong></a></li>
+        <li><a href="https://github.com/maxazan/jquery-treegrid/tarball/master">Download <br><strong>TAR Ball</strong></a></li>
+        <li><a href="https://github.com/maxazan/jquery-treegrid">View On <br><strong>GitHub</strong></a></li>
+      </ul>
       <h2>Overview</h2>
       <p><strong>What is it TreeGrid?</strong> This plugin needs for rendering tree in table</p>
       <p><b>Зачем это нужно?</b> Обычными таблицами не всегда удобно пользоваться, для отображения информации в которых есть
@@ -34,14 +36,16 @@
         <li>Создания девева из HTML</li>
       </ul>
       <h2>Usage</h2>
-	  <p>Step 1. Initialize plugin</p>
+      <p>Step 1. Initialize plugin</p>
       <pre><code>
 &lt;script type="text/javascript" src="js/jquery.js"&gt;&lt;/script&gt;
 &lt;script type="text/javascript" src="js/jquery.treegrid.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="css/jquery.treegrid.css"&gt;
+
 &lt;script type="text/javascript"&gt;
   $('.tree').treegrid();
 &lt;/script&gt;</code></pre>
-	<p>Step 2. Make table</p>
+      <p>Step 2. Make table</p>
       <pre><code class="html">
 &lt;table class="tree"&gt;
 	&lt;tr class="treegrid-1"&gt;
@@ -59,22 +63,22 @@
 &lt;/table&gt;
 
 	  </code></pre>
-<p>Step 3. See result</p>
+      <p>Step 3. See result</p>
 
-<table class="tree">
-	<tr class="treegrid-1">
-		<td>Root node</td>
-	</tr>
-	<tr class="treegrid-2 treegrid-parent-1">
-		<td>Node 1-1</td>
-	</tr>
-	<tr class="treegrid-3 treegrid-parent-1">
-		<td>Node 1-2</td>
-	</tr>
-	<tr class="treegrid-4 treegrid-parent-3">
-		<td>Node 1-2-1</td>
-	</tr>
-</table>
+      <table class="tree">
+        <tr class="treegrid-1">
+          <td>Root node</td>
+        </tr>
+        <tr class="treegrid-2 treegrid-parent-1">
+          <td>Node 1-1</td>
+        </tr>
+        <tr class="treegrid-3 treegrid-parent-1">
+          <td>Node 1-2</td>
+        </tr>
+        <tr class="treegrid-4 treegrid-parent-3">
+          <td>Node 1-2-1</td>
+        </tr>
+      </table>
 
       <h2>Configuration Settings</h2>
       <h3>Settings</h3>
@@ -253,7 +257,43 @@
             $('#node-2').treegrid('collapse');
             </pre>
           </td>
-        </tr>  
+        </tr>
+        <tr>
+          <td>expandRecursive</td>
+          <td>Раскрыть ветки рекурсивно</td>
+          <td>
+            <pre>
+            $('#node-2').treegrid('expandRecursive');
+            </pre>
+          </td>
+        </tr>        
+        <tr>
+          <td>collapseRecursive</td>
+          <td>Закрыть ветку рекурсивно</td>
+          <td>
+            <pre>
+            $('#node-2').treegrid('collapseRecursive');
+            </pre>
+          </td>
+        </tr>
+        <tr>
+          <td>expandAll</td>
+          <td>Раскрыть все ветки</td>
+          <td>
+            <pre>
+            $('#tree').treegrid('expandAll');
+            </pre>
+          </td>
+        </tr>        
+        <tr>
+          <td>collapseAll</td>
+          <td>Закрыть все ветки</td>
+          <td>
+            <pre>
+            $('#tree').treegrid('collapseAll');
+            </pre>
+          </td>
+        </tr>        
         <tr>
           <td>toggle</td>
           <td>Закрыть ветку если она открыта и открыть, если закрыта</td>
@@ -272,31 +312,36 @@
             </pre>
           </td>
         </tr> 
-        
-        
+
+
       </table>
       <h2>Examples</h2>
       <h3>Unit Tests</h3>
 
     </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.treegrid.js"></script>
     <script type="text/javascript">
-	var metas = document.getElementsByTagName('meta');
-var i;
-if (navigator.userAgent.match(/iPhone/i)) {
-  for (i=0; i<metas.length; i++) {
-    if (metas[i].name == "viewport") {
-      metas[i].content = "width=device-width, minimum-scale=1.0, maximum-scale=1.0";
-    }
-  }
-  document.addEventListener("gesturestart", gestureStart, false);
-}
-function gestureStart() {
-  for (i=0; i<metas.length; i++) {
-    if (metas[i].name == "viewport") {
-      metas[i].content = "width=device-width, minimum-scale=0.25, maximum-scale=1.6";
-    }
-  }
-}</script>
-    
+          $('.tree').treegrid();
+    </script>    
+    <script type="text/javascript">
+      var metas = document.getElementsByTagName('meta');
+      var i;
+      if (navigator.userAgent.match(/iPhone/i)) {
+        for (i = 0; i < metas.length; i++) {
+          if (metas[i].name == "viewport") {
+            metas[i].content = "width=device-width, minimum-scale=1.0, maximum-scale=1.0";
+          }
+        }
+        document.addEventListener("gesturestart", gestureStart, false);
+      }
+      function gestureStart() {
+        for (i = 0; i < metas.length; i++) {
+          if (metas[i].name == "viewport") {
+            metas[i].content = "width=device-width, minimum-scale=0.25, maximum-scale=1.6";
+          }
+        }
+      }</script>
+
   </body>
 </html>

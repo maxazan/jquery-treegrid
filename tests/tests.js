@@ -41,6 +41,11 @@ test("isLast()", function() {
   ok($('#node-1-1-2-1').treegrid('isLast') === true, "Last test!");
   ok($('#node-1-2').treegrid('isLast') === false, "Not Last test!");
 });
+test("isRoot()", function() {
+  ok($('#node-1').treegrid('isRoot') === true, "Root test!");
+  ok($('#node-1-2').treegrid('isRoot') === false, "Not Root test!");
+  ok($('#node-2').treegrid('isRoot') === true, "Other root test!");
+});
 
 test("expand(), collapse(), isExpanded(), isCollapsed()", function() {
   $('#node-1').treegrid('expand');
@@ -51,4 +56,29 @@ test("expand(), collapse(), isExpanded(), isCollapsed()", function() {
   ok($('#node-1').hasClass('treegrid-collapsed'), "Collapsed class");
   $('#node-1').find('.treegrid-expander').click();
   ok($('#node-1').treegrid('isExpanded') === true, "Expanded after click simulate");
+  $('#node-1').treegrid('collapse');
+  ok($('#node-1-1').is(':visible') === false, "hidden child node 1-1");
+  ok($('#node-1-1-2').is(':visible') === false, "hidden child node 1-1-2");
+  ok($('#node-1-1-2-1').is(':visible') === false, "hidden child node 1-1-2-1");
+
 });
+
+
+test("expandAll()", function() {
+  $('#tree-1').treegrid('expandAll');
+  ok($('#node-1').treegrid('isExpanded') === true, "Expanded");
+  ok($('#node-1-1').treegrid('isExpanded') === true, "Expanded 1-1");
+  ok($('#node-1-1-2').treegrid('isExpanded') === true, "Expanded 1-1-2");
+});
+
+
+test("collapseAll()", function() {
+  $('#tree-1').treegrid('collapseAll');
+  ok($('#node-1').treegrid('isExpanded') === false, "Collapsed");
+  ok($('#node-1-1').treegrid('isExpanded') === false, "Collapsed 1-1");
+  ok($('#node-1-1-2').treegrid('isExpanded') === false, "Collapsed 1-1-2");
+  $('#node-1-1-2').treegrid('expandAll');
+  ok($('#node-1-1').treegrid('isExpanded') === true, "Expanded 1-1");
+});
+
+

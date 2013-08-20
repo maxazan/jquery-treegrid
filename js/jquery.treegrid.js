@@ -137,6 +137,14 @@
       }
       return $(this).treegrid('getParentNode').treegrid('getDepth') + 1;
     },
+    /*
+     * Method return true if node is root
+     * 
+     * @returns {Boolean}
+     */
+    isRoot: function() {
+      return $(this).treegrid('getDepth') === 0;
+    },
     /**
      * Method return true if node has no child nodes
      * 
@@ -185,7 +193,7 @@
      */
     isOneOfParentCollapsed: function() {
       var $this = $(this);
-      if ($this.treegrid('getParentNode') === null || $this.treegrid('getParentNode') === 0) {
+      if ($this.treegrid('isRoot')) {
         return false;
       } else {
         if ($this.treegrid('getParentNode').treegrid('isCollapsed')) {
@@ -201,13 +209,38 @@
      * @returns {Node}
      */
     expand: function() {
-      var $this = $(this);
-      if (!$this.treegrid('isLeaf')) {
-        $this.removeClass('treegrid-collapsed');
-        $this.addClass('treegrid-expanded');
-        $this.treegrid('render');
-      }
+      return $(this).each(function() {
+        var $this = $(this);
+        if (!$this.treegrid('isLeaf')) {
+          $this.removeClass('treegrid-collapsed');
+          $this.addClass('treegrid-expanded');
+          $this.treegrid('render');
+        }
+      });
+    },
+    /**
+     * Expand all nodes
+     * 
+     * @returns {Node}
+     */
+    expandAll: function() {
+      $this = $(this);
+      $this.data('treegrid').treegrid('getRootNodes').treegrid('expandRecursive');
       return $this;
+    },
+    /**
+     * Expand current node and all child nodes begin from current
+     * 
+     * @returns {Node}
+     */
+    expandRecursive: function() {
+      return $(this).each(function() {
+        var $this = $(this);
+        $this.treegrid('expand');
+        if (!$this.treegrid('isLeaf')) {
+          $this.treegrid('getChildNodes').treegrid('expandRecursive');
+        }
+      });
     },
     /**
      * Collapse node
@@ -215,13 +248,38 @@
      * @returns {Node}
      */
     collapse: function() {
-      var $this = $(this);
-      if (!$this.treegrid('isLeaf')) {
-        $this.removeClass('treegrid-expanded');
-        $this.addClass('treegrid-collapsed');
-        $this.treegrid('render');
-      }
+      return $(this).each(function() {
+        var $this = $(this);
+        if (!$this.treegrid('isLeaf')) {
+          $this.removeClass('treegrid-expanded');
+          $this.addClass('treegrid-collapsed');
+          $this.treegrid('render');
+        }
+      });
+    },
+    /**
+     * Collapse all nodes
+     * 
+     * @returns {Node}
+     */
+    collapseAll: function() {
+      $this = $(this);
+      $this.data('treegrid').treegrid('getRootNodes').treegrid('collapseRecursive');
       return $this;
+    },
+    /**
+     * Collapse current node and all child nodes begin from current
+     * 
+     * @returns {Node}
+     */
+    collapseRecursive: function() {
+      return $(this).each(function() {
+        var $this = $(this);
+        $this.treegrid('collapse');
+        if (!$this.treegrid('isLeaf')) {
+          $this.treegrid('getChildNodes').treegrid('collapseRecursive');
+        }
+      });
     },
     /**
      * Expand if collapsed, Collapse if expanded
@@ -243,8 +301,8 @@
      * @returns {Node}
      */
     render: function() {
-      var $this = $(this);
-      $this.each(function() {
+      $(this).each(function() {
+        var $this = $(this);
         if ($this.treegrid('isOneOfParentCollapsed')) {
           $this.hide();
         } else {
@@ -257,17 +315,15 @@
       return $this;
     }
   };
-
   $.fn.treegrid = function(method) {
     if (methods[method]) {
       return methods[ method ].apply(this, Array.prototype.slice.call(arguments, 1));
     } else if (typeof method === 'object' || !method) {
       return methods.initTree.apply(this, arguments);
     } else {
-      $.error('Метод с именем ' + method + ' не существует для jQuery.treegrid');
+      $.error('Method with name ' + method + ' does not exists for jQuery.treegrid');
     }
   };
-
 // plugin's default options
   $.fn.treegrid.defaults = {
     initialState: 'expanded',
@@ -308,5 +364,4 @@
       return $(result);
     }
   };
-
 })(jQuery);
