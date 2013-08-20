@@ -191,7 +191,7 @@
      * 
      * @returns {Boolean}
      */
-    isOneOfParentCollapsed: function() {
+    isOneOfParentsCollapsed: function() {
       var $this = $(this);
       if ($this.treegrid('isRoot')) {
         return false;
@@ -199,7 +199,7 @@
         if ($this.treegrid('getParentNode').treegrid('isCollapsed')) {
           return true;
         } else {
-          return $this.treegrid('getParentNode').treegrid('isOneOfParentCollapsed');
+          return $this.treegrid('getParentNode').treegrid('isOneOfParentsCollapsed');
         }
       }
     },
@@ -303,7 +303,7 @@
     render: function() {
       $(this).each(function() {
         var $this = $(this);
-        if ($this.treegrid('isOneOfParentCollapsed')) {
+        if ($this.treegrid('isOneOfParentsCollapsed')) {
           $this.hide();
         } else {
           $this.show();

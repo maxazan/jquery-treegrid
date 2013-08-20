@@ -49,16 +49,16 @@
       <pre><code class="html">
 &lt;table class="tree"&gt;
 	&lt;tr class="treegrid-1"&gt;
-		&lt;td&gt;Root node&lt;/td&gt;
+		&lt;td&gt;Root node&lt;/td&gt;&lt;td&gt;Additional info&lt;/td&gt;
 	&lt;/tr&gt;
 	&lt;tr class="treegrid-2 treegrid-parent-1"&gt;
-		&lt;td&gt;Node 1-1&lt;/td&gt;
+		&lt;td&gt;Node 1-1&lt;/td&gt;&lt;td&gt;Additional info&lt;/td&gt;
 	&lt;/tr&gt;
 	&lt;tr class="treegrid-3 treegrid-parent-1"&gt;
-		&lt;td&gt;Node 1-2&lt;/td&gt;
+		&lt;td&gt;Node 1-2&lt;/td&gt;&lt;td&gt;Additional info&lt;/td&gt;
 	&lt;/tr&gt;
 	&lt;tr class="treegrid-4 treegrid-parent-3"&gt;
-		&lt;td&gt;Node 1-2-1&lt;/td&gt;
+		&lt;td&gt;Node 1-2-1&lt;/td&gt;&lt;td&gt;Additional info&lt;/td&gt;
 	&lt;/tr&gt;
 &lt;/table&gt;
 
@@ -67,249 +67,216 @@
 
       <table class="tree">
         <tr class="treegrid-1">
-          <td>Root node</td>
+          <td>Root node</td><td>Additional info</td>
         </tr>
         <tr class="treegrid-2 treegrid-parent-1">
-          <td>Node 1-1</td>
+          <td>Node 1-1</td><td>Additional info</td>
         </tr>
         <tr class="treegrid-3 treegrid-parent-1">
-          <td>Node 1-2</td>
+          <td>Node 1-2</td><td>Additional info</td>
         </tr>
         <tr class="treegrid-4 treegrid-parent-3">
-          <td>Node 1-2-1</td>
+          <td>Node 1-2-1</td><td>Additional info</td>
         </tr>
       </table>
 
       <h2>Configuration Settings</h2>
       <h3>Settings</h3>
       <table>
-        <tr><th>Параметр</th><th>Тип</th><th>Значение по умолчанию</th><th>Описание</th></tr>
+        <tr><th>Parametr</th><th>Type</th><th>Default value</th><th>Description</th></tr>
         <tr>
           <td>initialState</td>
           <td>String</td>
           <td>expanded</td>
-          <td>Изначальное состояние таблицы<br>
-            'expanded' - Все ветки раскрытые<br>
-            'collapsed' - Все ветки свернутые<br>
+          <td>Initial state of tree<br>
+            'expanded' - all nodes will be expanded<br>
+            'collapsed' - all nodes will be collapsed<br>
           </td>
         </tr>
         <tr>
           <td>expanderTemplate</td>
           <td>String</td>
           <td>&lt;span class="treegrid-expander"&gt;&lt;/span&gt;</td>
-          <td>Елемент при нажатии на который будет проискодить раскрытие/свертывание веток</td>
+          <td>HTML Element when you click on that will be collapse/expand branches</td>
         </tr>
         <tr>
           <td>indentTemplate</td>
           <td>String</td>
           <td>&lt;span class="treegrid-indent"&gt;&lt;/span&gt;</td>
-          <td>Елемент который будет ставиться как отступы в зависимости от глубины вложения nodы</td>
+          <td>HTML Element that will be placed as padding, depending on the depth of nesting node</td>
         </tr>
 
       </table>
       <h3>Events</h3>
-      <h2>Public methods</h2>
+      <h3>Public methods</h3>
 
       <table>
         <tr>
-          <th>Название</th>
-          <th>Описание</th>
-          <th>Пример</th>
+          <th>Method name</th>
+          <th>Description</th>
+          <th>Example</th>
         </tr>
         <tr>
           <td>getRootNodes</td>
-          <td>Возвращает корневые ветки</td>
+          <td>Returns the root branches</td>
           <td>
-            <pre>
-            $('.tree').treegrid('getRootNodes').treegrid('expand');
-            </pre>
+            <pre><code class="javascript">// Expand all root nodes
+$('.tree').treegrid('getRootNodes').treegrid('expand');</code></pre>
           </td>
         </tr>
         <tr>
           <td>getNodeId</td>
-          <td>Возвращает id ветки</td>
+          <td>Return the id of node</td>
           <td>
-            <pre>
-            if($('#node-2').treegrid('getNodeId')===2){
-              //DO SOMETHING
-            };
-            </pre>
+            <pre><code class="javascript">if($('#node-2').treegrid('getNodeId')===2){
+  // Do something with node 2
+};</code></pre>
           </td>
         </tr>
         <tr>
           <td>getParentNodeId</td>
-          <td>Возвращает id родительской ветки или null если ветка корневая</td>
+          <td>Return the id of parent node or null if node is root</td>
           <td>
-            <pre>
-            if($('#node-2').treegrid('getParentNodeId')===null){
-              //DO SOMETHING
-            };
-            </pre>
+            <pre><code class="javascript">if($('#node-2').treegrid('getParentNodeId')===2){
+  // Do something if parent node Id is 2
+};</code></pre>
           </td>
         </tr>
         <tr>
           <td>getParentNode</td>
-          <td>Возвращает родительскую ветку или null если ветка корневая</td>
+          <td>Return the parent node or null if node is root</td>
           <td>
-            <pre>
-            $('#node-2').treegrid('getParentNode').treegrid('collapse');
-            </pre>
+<pre><code class="javascript">// Expand parent node
+$('#node-2').treegrid('getParentNode').treegrid('collapse');
+</code></pre>		  
           </td>
         </tr>    
         <tr>
           <td>getChildNodes</td>
-          <td>Возвращает child nodes или null если ветка листик</td>
+          <td>Return the child nodes or null if node is leaf</td>
           <td>
-            <pre>
-            $('#node-2').treegrid('getChildNodes').treegrid('expand');
-            </pre>
+<pre><code class="javascript">// Expand child nodes
+$('#node-2').treegrid('getChildNodes').treegrid('expand');
+</code></pre>		  
           </td>
         </tr>  
         <tr>
           <td>getDepth</td>
-          <td>Возвращает глубину вложености ветки</td>
+          <td>Returns the depth of nested branch</td>
           <td>
-            <pre>
-            //открыть все до 2ой вложености
-            $('.tree').find('tr').each(function(){
-              if ($(this).treegrid('getDepth')<2){
-                $(this).treegrid('expand');
-              }
-            });
-            </pre>
+<pre><code class="javascript">// Expand all nodes 2nd nesting
+$('.tree').find('tr').each(function(){
+  if ($(this).treegrid('getDepth')<2){
+	$(this).treegrid('expand');
+  }
+});</code></pre>
           </td>
         <tr>
           <td>isLeaf</td>
-          <td>Является ли ветка листиком</td>
+          <td>Is there a node leaf</td>
           <td>
-            <pre>
-            //сапятать все файлы
-            $('.tree').find('tr').each(function(){
-              if ($(this).treegrid('isLeaf')){
-                $(this).hide();
-              }
-            });
-            </pre>
+            <pre><code class="javascript">// hide all files
+$('.tree').find('tr').each(function(){
+  if ($(this).treegrid('isLeaf')){
+	$(this).hide();
+  }
+});</code></pre>
           </td>
 
         </tr>          
         <tr>
           <td>isLast</td>
-          <td>Является ли ветка последним элементом среди всех элементов с этим родителем</td>
+          <td>Is node a last element of its parent</td>
           <td>
-            <pre>
-            //сапятать все последние елементы
-            $('.tree').find('tr').each(function(){
-              if ($(this).treegrid('isLast')){
-                $(this).hide();
-              }
-            });
-            </pre>
+            <pre><code class="javascript">// hide all last elements
+$('.tree').find('tr').each(function(){
+  if ($(this).treegrid('isLast')){
+	$(this).hide();
+  }
+});</code></pre>
           </td>
         </tr>
         <tr>
           <td>isExpanded</td>
-          <td>Раскрыта ли ветка</td>
+          <td>Is node expanded</td>
           <td>
-            <pre>
-            if($('#node-2').treegrid('isExpanded')){
-              //DO SOMETHING
-            };
-            </pre>
+            <pre><code class="javascript">if($('#node-2').treegrid('isExpanded')){
+  // Do something if node expanded
+};</code></pre>
           </td>
         </tr>
         <tr>
           <td>isCollapsed</td>
-          <td>Закрыта ли ветка</td>
+          <td>Is node collapsed</td>
           <td>
-            <pre>
-            if($('#node-2').treegrid('isCollapsed')){
-              //DO SOMETHING
-            };
-            </pre>
+            <pre><code class="javascript">if($('#node-2').treegrid('isCollapsed')){
+  // Do something if node collapsed
+};</code></pre>
           </td>
         </tr>
         <tr>
-          <td>isOneOfParentCollapsed</td>
-          <td>Закрыта ли хоть одна из родительских веток</td>
+          <td>isOneOfParentsCollapsed</td>
+          <td>Is at least one of the parent nodes is collapsed</td>
           <td>
-            <pre>
-            if($('#node-2').treegrid('isOneOfParentCollapsed')){
-              //DO SOMETHING
-            };
-            </pre>
+            <pre><code class="javascript">if($('#node-2').treegrid('isOneOfParentCollapsed')){
+  // Do something if one of parent collapsed
+};</code></pre>
           </td>
         </tr>
         <tr>
           <td>expand</td>
-          <td>Раскрыть ветку</td>
+          <td>Expand node</td>
           <td>
-            <pre>
-            $('#node-2').treegrid('expand');
-            </pre>
+            <pre><code class="javascript">$('#node-2').treegrid('expand');</code></pre>
           </td>
         </tr>        
         <tr>
           <td>collapse</td>
-          <td>Закрыть ветку</td>
+          <td>Collapse node</td>
           <td>
-            <pre>
-            $('#node-2').treegrid('collapse');
-            </pre>
-          </td>
+			<pre><code class="javascript">$('#node-2').treegrid('collapse');</code></pre>
+			</td>
         </tr>
         <tr>
           <td>expandRecursive</td>
-          <td>Раскрыть ветки рекурсивно</td>
+          <td>Expand nodes recursively</td>
           <td>
-            <pre>
-            $('#node-2').treegrid('expandRecursive');
-            </pre>
+            <pre><code class="javascript">$('#node-2').treegrid('expandRecursive');</code></pre>
           </td>
         </tr>        
         <tr>
           <td>collapseRecursive</td>
-          <td>Закрыть ветку рекурсивно</td>
+          <td>Collapse nodes recursively</td>
           <td>
-            <pre>
-            $('#node-2').treegrid('collapseRecursive');
-            </pre>
+            <pre><code class="javascript">$('#node-2').treegrid('collapseRecursive');</code></pre>
           </td>
         </tr>
         <tr>
           <td>expandAll</td>
-          <td>Раскрыть все ветки</td>
+          <td>Expand all nodes</td>
           <td>
-            <pre>
-            $('#tree').treegrid('expandAll');
-            </pre>
+		  <pre><code class="javascript">$('#tree').treegrid('expandAll');</code></pre>
           </td>
         </tr>        
         <tr>
           <td>collapseAll</td>
-          <td>Закрыть все ветки</td>
+          <td>Collapse all nodes</td>
           <td>
-            <pre>
-            $('#tree').treegrid('collapseAll');
-            </pre>
+            <pre><code class="javascript">$('#tree').treegrid('collapseAll');</code></pre>
           </td>
         </tr>        
         <tr>
           <td>toggle</td>
-          <td>Закрыть ветку если она открыта и открыть, если закрыта</td>
+          <td>Collapse node if it expanded and expand when collapsed</td>
           <td>
-            <pre>
-            $('#node-2').treegrid('toggle');
-            </pre>
+		  <pre><code class="javascript">$('#node-2').treegrid('toggle');</code></pre>
           </td>
         </tr> 
         <tr>
           <td>render</td>
-          <td>Перерисовать ветку и всех ее детей</td>
+          <td>Redraw the node and all its children</td>
           <td>
-            <pre>
-            $('#node-2').treegrid('render');
-            </pre>
+			<pre><code class="javascript">$('#node-2').treegrid('render');</code></pre>
           </td>
         </tr> 
 
