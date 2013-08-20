@@ -28,12 +28,26 @@
       </ul>
       <h2>Overview</h2>
       <p><strong>What is it TreeGrid?</strong> This plugin needs for rendering tree in table</p>
-      <p><b>Зачем это нужно?</b> Обычными таблицами не всегда удобно пользоваться, для отображения информации в которых есть
-        родительские и дочерниии эллементы. А обычные деревья, не всегда удобны для отображения больших данных.</p>
+      <table class="tree">
+        <tr class="treegrid-1">
+          <td>Root node</td><td>Additional info</td>
+        </tr>
+        <tr class="treegrid-2 treegrid-parent-1">
+          <td>Node 1-1</td><td>Additional info</td>
+        </tr>
+        <tr class="treegrid-3 treegrid-parent-1">
+          <td>Node 1-2</td><td>Additional info</td>
+        </tr>
+        <tr class="treegrid-4 treegrid-parent-3">
+          <td>Node 1-2-1</td><td>Additional info</td>
+        </tr>
+      </table>	  
 
-      <h3>Возможности</h3>
+
+      <h3>Features</h3>
       <ul>
-        <li>Создания девева из HTML</li>
+        <li>Create TreeGrid from HTML table</li>
+		<li>Simple and flexible javascript</li>
       </ul>
       <h2>Usage</h2>
       <p>Step 1. Initialize plugin</p>
@@ -107,7 +121,7 @@
         </tr>
 
       </table>
-      <h3>Events</h3>
+
       <h3>Public methods</h3>
 
       <table>
@@ -282,8 +296,8 @@ $('.tree').find('tr').each(function(){
 
 
       </table>
-      <h2>Examples</h2>
-      <h3>Unit Tests</h3>
+
+      <a href="test.html">Unit Tests</a>
 
     </div>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
