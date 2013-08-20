@@ -1,0 +1,18 @@
+{
+    "name": "treegrid",
+    "version": "0.1.0",
+    "title": "TreeGrid plugin for jQuery",
+    "author": {
+    "name" : "Pomazan Max",
+        "email" : "maxazan@mail.ru"
+},
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://opensource.org/licenses/MIT"
+        }
+    ],
+    "dependencies": {
+        "jquery": ">1.10.0"
+    }
+}
