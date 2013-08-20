@@ -5,8 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Jquery-treegrid by maxazan</title>
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
+	<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -14,58 +16,287 @@
   </head>
   <body>
     <div class="wrapper">
-      <header>
-        <h1>Jquery-treegrid</h1>
-        <p>TreeGrid plugin for jQuery</p>
 
-        <p class="view"><a href="https://github.com/maxazan/jquery-treegrid">View the Project on GitHub <small>maxazan/jquery-treegrid</small></a></p>
-
-
-        <ul>
-          <li><a href="https://github.com/maxazan/jquery-treegrid/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/maxazan/jquery-treegrid/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/maxazan/jquery-treegrid">View On <strong>GitHub</strong></a></li>
+      
+<h1>TreeGrid jQuery plugin</h1>
+        <ul class="download">
+          <li><a href="https://github.com/maxazan/jquery-treegrid/zipball/master">Download <br><strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/maxazan/jquery-treegrid/tarball/master">Download <br><strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/maxazan/jquery-treegrid">View On <br><strong>GitHub</strong></a></li>
         </ul>
-      </header>
-      <section>
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+      <h2>Overview</h2>
+      <p><b>Что такое TreeGrid?</b> Это плагин jQuery для отрисовки дерева в таблице.</p>
+      <p><b>Зачем это нужно?</b> Обычными таблицами не всегда удобно пользоваться, для отображения информации в которых есть
+        родительские и дочерниии эллементы. А обычные деревья, не всегда удобны для отображения больших данных.</p>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+      <h3>Возможности</h3>
+      <ul>
+        <li>Создания девева из HTML</li>
+      </ul>
+      <h2>Usage</h2>
+	  <p>Step 1. Initialize plugin</p>
+      <pre><code>
+&lt;script type="text/javascript" src="js/jquery.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="js/jquery.treegrid.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+  $('.tree').treegrid();
+&lt;/script&gt;</code></pre>
+	<p>Step 2. Make table</p>
+      <pre><code class="html">
+&lt;table class="tree"&gt;
+	&lt;tr class="treegrid-1"&gt;
+		&lt;td&gt;Root node&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="treegrid-2 treegrid-parent-1"&gt;
+		&lt;td&gt;Node 1-1&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="treegrid-3 treegrid-parent-1"&gt;
+		&lt;td&gt;Node 1-2&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr class="treegrid-4 treegrid-parent-3"&gt;
+		&lt;td&gt;Node 1-2-1&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+	  </code></pre>
+<p>Step 3. See result</p>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<table class="tree">
+	<tr class="treegrid-1">
+		<td>Root node</td>
+	</tr>
+	<tr class="treegrid-2 treegrid-parent-1">
+		<td>Node 1-1</td>
+	</tr>
+	<tr class="treegrid-3 treegrid-parent-1">
+		<td>Node 1-2</td>
+	</tr>
+	<tr class="treegrid-4 treegrid-parent-3">
+		<td>Node 1-2-1</td>
+	</tr>
+</table>
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+      <h2>Configuration Settings</h2>
+      <h3>Settings</h3>
+      <table>
+        <tr><th>Параметр</th><th>Тип</th><th>Значение по умолчанию</th><th>Описание</th></tr>
+        <tr>
+          <td>initialState</td>
+          <td>String</td>
+          <td>expanded</td>
+          <td>Изначальное состояние таблицы<br>
+            'expanded' - Все ветки раскрытые<br>
+            'collapsed' - Все ветки свернутые<br>
+          </td>
+        </tr>
+        <tr>
+          <td>expanderTemplate</td>
+          <td>String</td>
+          <td>&lt;span class="treegrid-expander"&gt;&lt;/span&gt;</td>
+          <td>Елемент при нажатии на который будет проискодить раскрытие/свертывание веток</td>
+        </tr>
+        <tr>
+          <td>indentTemplate</td>
+          <td>String</td>
+          <td>&lt;span class="treegrid-indent"&gt;&lt;/span&gt;</td>
+          <td>Елемент который будет ставиться как отступы в зависимости от глубины вложения nodы</td>
+        </tr>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+      </table>
+      <h3>Events</h3>
+      <h2>Public methods</h2>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+      <table>
+        <tr>
+          <th>Название</th>
+          <th>Описание</th>
+          <th>Пример</th>
+        </tr>
+        <tr>
+          <td>getRootNodes</td>
+          <td>Возвращает корневые ветки</td>
+          <td>
+            <pre>
+            $('.tree').treegrid('getRootNodes').treegrid('expand');
+            </pre>
+          </td>
+        </tr>
+        <tr>
+          <td>getNodeId</td>
+          <td>Возвращает id ветки</td>
+          <td>
+            <pre>
+            if($('#node-2').treegrid('getNodeId')===2){
+              //DO SOMETHING
+            };
+            </pre>
+          </td>
+        </tr>
+        <tr>
+          <td>getParentNodeId</td>
+          <td>Возвращает id родительской ветки или null если ветка корневая</td>
+          <td>
+            <pre>
+            if($('#node-2').treegrid('getParentNodeId')===null){
+              //DO SOMETHING
+            };
+            </pre>
+          </td>
+        </tr>
+        <tr>
+          <td>getParentNode</td>
+          <td>Возвращает родительскую ветку или null если ветка корневая</td>
+          <td>
+            <pre>
+            $('#node-2').treegrid('getParentNode').treegrid('collapse');
+            </pre>
+          </td>
+        </tr>    
+        <tr>
+          <td>getChildNodes</td>
+          <td>Возвращает child nodes или null если ветка листик</td>
+          <td>
+            <pre>
+            $('#node-2').treegrid('getChildNodes').treegrid('expand');
+            </pre>
+          </td>
+        </tr>  
+        <tr>
+          <td>getDepth</td>
+          <td>Возвращает глубину вложености ветки</td>
+          <td>
+            <pre>
+            //открыть все до 2ой вложености
+            $('.tree').find('tr').each(function(){
+              if ($(this).treegrid('getDepth')<2){
+                $(this).treegrid('expand');
+              }
+            });
+            </pre>
+          </td>
+        <tr>
+          <td>isLeaf</td>
+          <td>Является ли ветка листиком</td>
+          <td>
+            <pre>
+            //сапятать все файлы
+            $('.tree').find('tr').each(function(){
+              if ($(this).treegrid('isLeaf')){
+                $(this).hide();
+              }
+            });
+            </pre>
+          </td>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+        </tr>          
+        <tr>
+          <td>isLast</td>
+          <td>Является ли ветка последним элементом среди всех элементов с этим родителем</td>
+          <td>
+            <pre>
+            //сапятать все последние елементы
+            $('.tree').find('tr').each(function(){
+              if ($(this).treegrid('isLast')){
+                $(this).hide();
+              }
+            });
+            </pre>
+          </td>
+        </tr>
+        <tr>
+          <td>isExpanded</td>
+          <td>Раскрыта ли ветка</td>
+          <td>
+            <pre>
+            if($('#node-2').treegrid('isExpanded')){
+              //DO SOMETHING
+            };
+            </pre>
+          </td>
+        </tr>
+        <tr>
+          <td>isCollapsed</td>
+          <td>Закрыта ли ветка</td>
+          <td>
+            <pre>
+            if($('#node-2').treegrid('isCollapsed')){
+              //DO SOMETHING
+            };
+            </pre>
+          </td>
+        </tr>
+        <tr>
+          <td>isOneOfParentCollapsed</td>
+          <td>Закрыта ли хоть одна из родительских веток</td>
+          <td>
+            <pre>
+            if($('#node-2').treegrid('isOneOfParentCollapsed')){
+              //DO SOMETHING
+            };
+            </pre>
+          </td>
+        </tr>
+        <tr>
+          <td>expand</td>
+          <td>Раскрыть ветку</td>
+          <td>
+            <pre>
+            $('#node-2').treegrid('expand');
+            </pre>
+          </td>
+        </tr>        
+        <tr>
+          <td>collapse</td>
+          <td>Закрыть ветку</td>
+          <td>
+            <pre>
+            $('#node-2').treegrid('collapse');
+            </pre>
+          </td>
+        </tr>  
+        <tr>
+          <td>toggle</td>
+          <td>Закрыть ветку если она открыта и открыть, если закрыта</td>
+          <td>
+            <pre>
+            $('#node-2').treegrid('toggle');
+            </pre>
+          </td>
+        </tr> 
+        <tr>
+          <td>render</td>
+          <td>Перерисовать ветку и всех ее детей</td>
+          <td>
+            <pre>
+            $('#node-2').treegrid('render');
+            </pre>
+          </td>
+        </tr> 
+        
+        
+      </table>
+      <h2>Examples</h2>
+      <h3>Unit Tests</h3>
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/maxazan">maxazan</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
+    <script type="text/javascript">
+	var metas = document.getElementsByTagName('meta');
+var i;
+if (navigator.userAgent.match(/iPhone/i)) {
+  for (i=0; i<metas.length; i++) {
+    if (metas[i].name == "viewport") {
+      metas[i].content = "width=device-width, minimum-scale=1.0, maximum-scale=1.0";
+    }
+  }
+  document.addEventListener("gesturestart", gestureStart, false);
+}
+function gestureStart() {
+  for (i=0; i<metas.length; i++) {
+    if (metas[i].name == "viewport") {
+      metas[i].content = "width=device-width, minimum-scale=0.25, maximum-scale=1.6";
+    }
+  }
+}</script>
     
   </body>
 </html>
