@@ -30,6 +30,7 @@
 
 
       <h1>TreeGrid jQuery plugin</h1>
+      <p>Last version 0.1.2</p>
       <ul class="download">
         <li><a href="https://github.com/maxazan/jquery-treegrid/zipball/master">Download <br><strong>ZIP File</strong></a></li>
         <li><a href="https://github.com/maxazan/jquery-treegrid/tarball/master">Download <br><strong>TAR Ball</strong></a></li>
@@ -58,6 +59,9 @@
         <li>Create TreeGrid from HTML table</li>
 		<li>Simple and flexible javascript</li>
       </ul>
+      <h2>Examples</h2>
+      <p><a href="examples/example-basic.html" target="_blank">Basic example</a></p>
+      <p><a href="examples/example-save-state.html" target="_blank">Save state example</a></p>
       <h2>Usage</h2>
       <p>Step 1. Initialize plugin</p>
       <pre><code>
@@ -116,6 +120,30 @@
             'collapsed' - all nodes will be collapsed<br>
           </td>
         </tr>
+        <tr>
+          <td>saveState</td>
+          <td>Boolean</td>
+          <td>false</td>
+          <td>If true you can reload page and tree state was saved</td>
+        </tr>
+        <tr>
+          <td>saveStateMethod</td>
+          <td>String</td>
+          <td>cookie</td>
+          <td>
+            'cookie' - save state to cookie<br>
+            'hash' - save state to hash<br>
+          </td>
+        </tr>
+        <tr>
+          <td>saveStateName</td>
+          <td>String</td>
+          <td>tree-grid-state</td>
+          <td>
+            Name of cookie or hash to save state.
+          </td>
+        </tr>
+
         <tr>
           <td>expanderTemplate</td>
           <td>String</td>

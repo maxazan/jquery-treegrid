@@ -1,0 +1,5 @@
+== 0.1.2 - 26 August 2013
+* Added save state
+
+== 0.1.0 - 15 August 2013
+* Public release
