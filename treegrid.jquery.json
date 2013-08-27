@@ -2,6 +2,7 @@
   "name": "treegrid",
   "description": "jquery plugin for showing a HTML table as tree",
   "keywords": [
+    "treegrid",
     "explorer",
     "file",
     "table",
