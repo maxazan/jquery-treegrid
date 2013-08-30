@@ -1,5 +1,5 @@
 /*
- * jQuery treegrid Plugin 0.1.3
+ * jQuery treegrid Plugin 0.1.4
  * https://github.com/maxazan/jquery-treegrid
  * 
  * Copyright 2013, Pomazan Max
@@ -44,7 +44,7 @@
      */
     initExpander: function() {
       var $this = $(this);
-      var cell = $this.find('td').get($this.treegrid('getSetting', 'treeRow'));
+      var cell = $this.find('td').get($this.treegrid('getSetting', 'treeColumn'));
       var tpl = $this.treegrid('getSetting', 'expanderTemplate');
       var expander = $this.treegrid('getSetting', 'getExpander').apply(this);
       if (expander) {
@@ -466,7 +466,7 @@
     indentTemplate: '<span class="treegrid-indent"></span>',
     expanderExpandedClass: 'treegrid-expander-expanded',
     expanderCollapsedClass: 'treegrid-expander-collapsed',
-    treeRow: 0,
+    treeColumn: 0,
     getExpander: function() {
       return $(this).find('.treegrid-expander');
     },
