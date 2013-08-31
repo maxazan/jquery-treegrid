@@ -11,6 +11,13 @@ test("isolated options", function() {
     ok($('#node-1-1-2-1').treegrid('getSetting', 'initialState') !== $('#tnode-1-1-2-1').treegrid('getSetting', 'initialState'), "need to be not equal");
 });
 
+test("treeColumn test", function() {
+    ok($($('#node-1-1-2').find('td').get(1)).find('.treegrid-expander').length===0, "0");
+    ok($($('#node-1-1-2').find('td').get(0)).find('.treegrid-expander').length===1, "1");
+
+  ok($($('#tnode-1-1-2').find('td').get(0)).find('.treegrid-expander').length===0, "0");
+    ok($($('#tnode-1-1-2').find('td').get(1)).find('.treegrid-expander').length===1, "1");
+});
 
 test("getNodeId()", function() {
     equal($('#node-1-1-2-1').treegrid('getNodeId'), 10, "Return 10");
