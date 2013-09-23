@@ -110,3 +110,14 @@ test("Save state (cookie method)", function() {
     ok($('#tnode-1-1').treegrid('isExpanded'), "tnode-1-1 expanded");
 
 });
+
+
+test("Alphanumeric id", function() {
+
+    equal($('#anode-1').treegrid('getDepth'), 0, "Return 0");
+    equal($('#anode-1-1-2-1').treegrid('getDepth'), 3, "Return 3");
+    equal($('#anode-1').treegrid('getChildNodes').length, 4, "Return 4");
+    equal($('#anode-1-1-2-1').treegrid('getChildNodes').length, [], "Return []");
+
+
+});
