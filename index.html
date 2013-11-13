@@ -210,6 +210,19 @@ $('.tree').treegrid('getRootNodes').treegrid('expand');</code></pre>
                     </td>
                 </tr>
                 <tr>
+                    <td>getAllNodes</td>
+                    <td>Return the all nodes of tree</td>
+                    <td>
+                        <pre><code class="javascript">// Find all nodes
+  $('#tree-1').treegrid('getAllNodes').each(function() {
+    if ($(this).treegrid("isLast")) {
+      //Do something with all last nodes
+    }
+  });
+</code></pre>		  
+                    </td>
+                </tr>                 
+                <tr>
                     <td>getParentNode</td>
                     <td>Return the parent node or null if node is root</td>
                     <td>
@@ -238,6 +251,19 @@ $('.tree').find('tr').each(function(){
   }
 });</code></pre>
                     </td>
+                <tr>
+                    <td>isNode</td>
+                    <td>return true if element is node</td>
+                    <td>
+                        <pre><code class="javascript">
+  $('#tree-1').find('tr').each(function() {
+    if ($(this).treegrid("isNode")) {
+      //Do something
+    }
+  });
+</code></pre>
+                    </td>
+                </tr>                    
                 <tr>
                     <td>isLeaf</td>
                     <td>Is there a node leaf</td>

@@ -1,3 +1,8 @@
+== 0.1.6
+* Add isNode method
+* Add getAllNodes method
+* Fix isLast method. Throw error if method is not node of tree.
+
 == 0.1.5
 * Add support alphanumeric id
 

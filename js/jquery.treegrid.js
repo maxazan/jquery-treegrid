@@ -149,6 +149,9 @@
      * @returns {unresolved}
      */
     getSetting: function(name) {
+      if (!$(this).treegrid('getTreeContainer')) {
+        return null;
+      }
       return $(this).treegrid('getTreeContainer').data('settings')[name];
     },
     /**
@@ -183,8 +186,23 @@
      * @returns {Array}
      */
     getRootNodes: function() {
-
       return $(this).treegrid('getSetting', 'getRootNodes').apply(this, [$(this).treegrid('getTreeContainer')]);
+    },
+    /**
+     * Method return all nodes of tree. 
+     * 
+     * @returns {Array}
+     */
+    getAllNodes: function() {
+      return $(this).treegrid('getSetting', 'getAllNodes').apply(this, [$(this).treegrid('getTreeContainer')]);
+    },
+    /**
+     * Mthod return true if element is Node
+     * 
+     * @returns {String}
+     */
+    isNode: function() {
+      return $(this).treegrid('getNodeId') !== null;
     },
     /**
      * Mthod return id of node
@@ -192,7 +210,11 @@
      * @returns {String}
      */
     getNodeId: function() {
-      return $(this).treegrid('getSetting', 'getNodeId').apply(this);
+      if ($(this).treegrid('getSetting', 'getNodeId') == null) {
+        return null;
+      } else {
+        return $(this).treegrid('getSetting', 'getNodeId').apply(this);
+      }
     },
     /**
      * Method return parent id of node or null if root node
@@ -257,13 +279,8 @@
      * @returns {Boolean}
      */
     isLast: function() {
-      var current_parent_id = $(this).treegrid('getParentNodeId');
-      if ($(this).next()) {
-        if ($(this).next().treegrid('getParentNodeId') === current_parent_id) {
-          return false;
-        } else {
-          return true;
-        }
+      if ($(this).next() && $(this).next().treegrid('isNode') && $(this).next().treegrid('getParentNodeId') === $(this).treegrid('getParentNodeId')) {
+        return false;
       } else {
         return true;
       }
@@ -501,6 +518,14 @@
         var templateClass = /treegrid-(\w+)/;
         var templateParentClass = /treegrid-parent-(\w+)/;
         return templateClass.test(classNames) && !templateParentClass.test(classNames);
+      });
+      return $(result);
+    },
+    getAllNodes: function(treegridContainer) {
+      var result = $.grep(treegridContainer.find('tr'), function(element) {
+        var classNames = $(element).attr('class');
+        var templateClass = /treegrid-(\w+)/;
+        return templateClass.test(classNames);
       });
       return $(result);
     }
