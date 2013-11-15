@@ -279,7 +279,7 @@ $('.tree').find('tr').each(function(){
                 </tr>          
                 <tr>
                     <td>isLast</td>
-                    <td>Is node a last element of its parent</td>
+                    <td>Return true if node is last in branch</td>
                     <td>
                         <pre><code class="javascript">// hide all last elements
 $('.tree').find('tr').each(function(){
@@ -289,6 +289,18 @@ $('.tree').find('tr').each(function(){
 });</code></pre>
                     </td>
                 </tr>
+                <tr>
+                    <td>isFirst</td>
+                    <td>Return true if node is first in branch</td>
+                    <td>
+                        <pre><code class="javascript">// hide all last elements
+$('.tree').find('tr').each(function(){
+  if ($(this).treegrid('isFirst')){
+	$(this).hide();
+  }
+});</code></pre>
+                    </td>
+                </tr>                
                 <tr>
                     <td>isExpanded</td>
                     <td>Is node expanded</td>

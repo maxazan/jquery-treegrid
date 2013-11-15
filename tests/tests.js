@@ -35,7 +35,7 @@ test("getParentNode()", function() {
 });
 
 test("getChildNodes()", function() {
-  equal($('#node-1').treegrid('getChildNodes').length, 4, "Return 4");
+  equal($('#node-1').treegrid('getChildNodes').length, 5, "Return 5");
   equal($('#node-1-1-2-1').treegrid('getChildNodes').length, [], "Return []");
 });
 
@@ -50,8 +50,25 @@ test("isLeaf()", function() {
 });
 
 test("isLast()", function() {
+  //Test root nodes
+  ok($('#node-1').treegrid('isLast') === false, "Not Last!");
+  ok($('#node-2').treegrid('isLast') === true, "Last!");
+  //Test nodes with branch
+  ok($('#node-1-4').treegrid('isLast') === false, "Not Last test!");
+  ok($('#node-1-5').treegrid('isLast') === true, "Last test!");
   ok($('#node-1-1-2-1').treegrid('isLast') === true, "Last test!");
   ok($('#node-1-2').treegrid('isLast') === false, "Not Last test!");
+});
+
+test("isFirst()", function() {
+  //Test root nodes
+  ok($('#node-1').treegrid('isFirst') === true, "First!");
+  ok($('#node-2').treegrid('isFirst') === false, "Not first!");
+  //Test nodes with branch
+  ok($('#node-1-1').treegrid('isFirst') === true, "First!");
+  ok($('#node-1-4').treegrid('isFirst') === false, "Not first!");
+  ok($('#node-1-1-2-1').treegrid('isFirst') === true, "First!");
+  ok($('#node-1-2').treegrid('isFirst') === false, "Not First!");
 });
 
 test("isRoot()", function() {
@@ -115,7 +132,7 @@ test("Alphanumeric id", function() {
 });
 
 test("getAllNodes", function() {
-  equal($('#tree-1').treegrid('getAllNodes').length, 11, "11");
+  equal($('#tree-1').treegrid('getAllNodes').length, 12, "12");
 });
 
 test("isNode", function() {

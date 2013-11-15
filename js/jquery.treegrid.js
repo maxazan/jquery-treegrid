@@ -1,5 +1,5 @@
 /*
- * jQuery treegrid Plugin 0.1.5
+ * jQuery treegrid Plugin 0.1.7
  * https://github.com/maxazan/jquery-treegrid
  * 
  * Copyright 2013, Pomazan Max
@@ -257,7 +257,7 @@
       }
       return $(this).treegrid('getParentNode').treegrid('getDepth') + 1;
     },
-    /*
+    /**
      * Method return true if node is root
      * 
      * @returns {Boolean}
@@ -279,11 +279,39 @@
      * @returns {Boolean}
      */
     isLast: function() {
-      if ($(this).next() && $(this).next().treegrid('isNode') && $(this).next().treegrid('getParentNodeId') === $(this).treegrid('getParentNodeId')) {
-        return false;
-      } else {
-        return true;
+      if ($(this).treegrid('isNode')) {
+        var parentNode = $(this).treegrid('getParentNode');
+        if (parentNode === null) {
+          if ($(this).treegrid('getNodeId') === $(this).treegrid('getRootNodes').last().treegrid('getNodeId')) {
+            return true;
+          }
+        } else {
+          if ($(this).treegrid('getNodeId') === parentNode.treegrid('getChildNodes').last().treegrid('getNodeId')) {
+            return true;
+          }
+        }
       }
+      return false;
+    },
+    /**
+     * Method return true if node first in branch
+     * 
+     * @returns {Boolean}
+     */
+    isFirst: function() {
+      if ($(this).treegrid('isNode')) {
+        var parentNode = $(this).treegrid('getParentNode');
+        if (parentNode === null) {
+          if ($(this).treegrid('getNodeId') === $(this).treegrid('getRootNodes').first().treegrid('getNodeId')) {
+            return true;
+          }
+        } else {
+          if ($(this).treegrid('getNodeId') === parentNode.treegrid('getChildNodes').first().treegrid('getNodeId')) {
+            return true;
+          }
+        }
+      }
+      return false;
     },
     /**
      * Return true if node expanded
