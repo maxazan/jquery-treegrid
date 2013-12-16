@@ -1,3 +1,6 @@
+== 0.1.8 - 16 December 2013
+* Fix support alphanumeric id (you can use "-" symbol in id)
+
 == 0.1.7 - 15 November 2013
 * Fix isLast method. https://github.com/maxazan/jquery-treegrid/issues/4
 * Add isFirst method
