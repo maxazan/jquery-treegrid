@@ -11,6 +11,9 @@
     <div id="qunit-fixture"></div>
     <script src="tests/qunit-1.12.0.js"></script>
     <script src="tests/tests.js"></script>
+			<table>
+	<tr>
+	<td>
     <table id='tree-1' border="1" cellpadding="0" cellspacing="0">
       <tr id="tree-head-1">
         <th>1</th><th>2</th>
@@ -57,6 +60,9 @@
       </tr>
 
 	  </table>
+	</td>
+	</tr>
+	</table>	  
 <hr>
     <table id='tree-2' border="1" cellpadding="0" cellspacing="0">
       <tr>
@@ -97,6 +103,7 @@
       </tr>
     </table>
     <hr>
+
     <table id='tree-3' border="1" cellpadding="0" cellspacing="0">
       <tr>
         <th>1</th><th>2</th>
@@ -135,7 +142,10 @@
         <td>2</td><td>Simple text of ...</td>
       </tr>
     </table>
-	
+
+	<hr>
+
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="js/jquery.treegrid.js"></script>
     <script src="js/jquery.cookie.js"></script>
@@ -144,6 +154,7 @@
       $("#tree-1").treegrid({initialState: 'collapsed'});
       $("#tree-2").treegrid({treeColumn:1, initialState: 'expanded', 'saveState': true, 'saveStateName': saveStateName});
 	  $("#tree-3").treegrid({initialState: 'collapsed'});
+	  $("#tree-4").treegrid();
     </script>
   </body>
 </html>

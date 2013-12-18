@@ -1,3 +1,6 @@
+== 0.1.9 - 18 December 2013
+* Fix table in table bug (thanks liuspcn)
+
 == 0.1.8 - 16 December 2013
 * Fix support alphanumeric id (you can use "-" symbol in id)
 

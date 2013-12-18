@@ -1,5 +1,5 @@
 /*
- * jQuery treegrid Plugin 0.1.8
+ * jQuery treegrid Plugin 0.1.9
  * https://github.com/maxazan/jquery-treegrid
  * 
  * Copyright 2013, Pomazan Max
@@ -51,7 +51,7 @@
         expander.remove();
       }
       $(tpl).prependTo(cell).click(function() {
-        $($(this).parents('tr')).treegrid('toggle');
+        $($(this).closest('tr')).treegrid('toggle');
       });
       return $this;
     },
@@ -538,7 +538,7 @@
       return treegridContainer.find('tr.' + templateClass);
     },
     getTreeGridContainer: function() {
-      return $(this).parents('table');
+      return $(this).closest('table');
     },
     getRootNodes: function(treegridContainer) {
       var result = $.grep(treegridContainer.find('tr'), function(element) {
