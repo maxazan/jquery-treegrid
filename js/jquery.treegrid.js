@@ -359,6 +359,12 @@
           $this.addClass('treegrid-expanded');
           $this.treegrid('render');
         }
+        
+        var onToggle = $this.treegrid("getSetting","onToggle");
+        if(typeof onToggle === "function"){
+          onToggle($this);
+        }
+        
         //save state
         if ($this.treegrid('getSetting', 'saveState')) {
           $this.treegrid('saveState');
@@ -402,6 +408,12 @@
           $this.addClass('treegrid-collapsed');
           $this.treegrid('render');
         }
+        
+        var onToggle = $this.treegrid("getSetting","onToggle");
+        if(typeof onToggle === "function"){
+          onToggle($this);
+        }
+        
         //Save state
         if ($this.treegrid('getSetting', 'saveState')) {
           $this.treegrid('saveState');
@@ -512,6 +524,7 @@
     expanderExpandedClass: 'treegrid-expander-expanded',
     expanderCollapsedClass: 'treegrid-expander-collapsed',
     treeColumn: 0,
+    onToggle: "undefined",
     getExpander: function() {
       return $(this).find('.treegrid-expander');
     },
