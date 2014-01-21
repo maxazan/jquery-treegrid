@@ -48,6 +48,7 @@
                 <li>Simple and flexible javascript</li>
                 <li>Compatible with bootstrap</li>
                 <li>Ability to save the state of the tree</li>
+                <li>Events support</li>
 
             </ul>            
             <h2>Usage</h2>
@@ -94,13 +95,14 @@
                     <td>Node 1-2-1</td><td>Additional info</td>
                 </tr>
             </table>            
-	  
+
             <h2>Other examples</h2>
             <p><a href="examples/example-basic.html" target="_blank">Basic example</a></p>
             <p><a href="examples/example-column.html" target="_blank">Tree on 2nd column example</a></p>
             <p><a href="examples/example-save-state.html" target="_blank">Save state example</a></p>
             <p><a href="examples/example-bootstrap-2.html" target="_blank">TreeGrid for bootstrap 2.x</a></p>
             <p><a href="examples/example-bootstrap-3.html" target="_blank">TreeGrid for bootstrap 3.x</a></p>
+            <p><a href="examples/example-events.html" target="_blank">Events examples</a></p>
 
 
             <h2>Configuration Settings</h2>
@@ -171,8 +173,25 @@
                     <td>&lt;span class="treegrid-indent"&gt;&lt;/span&gt;</td>
                     <td>HTML Element that will be placed as padding, depending on the depth of nesting node</td>
                 </tr>
-             
 
+                <tr>
+                    <td>onCollapse</td>
+                    <td>Function</td>
+                    <td>null</td>
+                    <td>Function, which will be executed when one of node will be collapsed</td>
+                </tr>
+                <tr>
+                    <td>onExpand</td>
+                    <td>Function</td>
+                    <td>null</td>
+                    <td>Function, which will be executed when one of node will be expanded</td>
+                </tr>
+                <tr>
+                    <td>onChange</td>
+                    <td>Function</td>
+                    <td>null</td>
+                    <td>Function, which will be executed when one of node will be expanded or collapsed</td>
+                </tr>
             </table>
 
             <h3>Public methods</h3>
@@ -387,7 +406,44 @@ $('.tree').find('tr').each(function(){
 
 
             </table>
-
+            <h3>Events</h3>
+            <table>
+                <tr>
+                    <th>Event name</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>collapse</td>
+                    <td>Will fire when node collapsed</td>
+                    <td>
+                        <pre><code class="javascript">//Alert when node in treegrid with class "tree" collapsed
+$('.tree').treegrid('getRootNodes').on('collapse', function(){
+   alert(this);
+});</code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>expand</td>
+                    <td>Will fire when node expanded</td>
+                    <td>
+                        <pre><code class="javascript">//Alert when node with id "node1" expanded
+$('#node1').on('expand', function(){
+   alert(this);
+});</code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>change</td>
+                    <td>Will fire when node changed. Expanded or collapsed</td>
+                    <td>
+                        <pre><code class="javascript">//Alert when node in treegrid with class "tree" changed. 
+$('.tree').treegrid('getRootNodes').on('change', function(){
+   alert(this);
+});</code></pre>
+                    </td>
+                </tr>                
+            </table>
             <h2><a href="test.html">Unit Tests</a></h2>
 
         </div>
