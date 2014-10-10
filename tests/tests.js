@@ -192,3 +192,26 @@ test("Global Events test", function() {
     $('#tree-4').find('#anode-1').treegrid("collapse");
     equal(globalCounter, count + 4);
 });
+
+test("Attaching and removing nodes", function() {
+    equal($('#tree-2').treegrid('getAllNodes').length, 11, "11");
+
+    var $leafNode = $('#tree-2').find('#tnode-1-1-2-1').clone();
+
+    $('#tree-2').find('#tnode-1-1-2-1').treegrid('removeNode');
+    equal($('#tree-2').treegrid('getAllNodes').length, 10, "10");
+
+    $('#tree-2').treegrid('attachNode', $leafNode);
+    equal($('#tree-2').treegrid('getAllNodes').length, 11, "11");
+
+    var $branchNode = $('#tree-2').find('#tnode-1-1-2').clone();
+    $('#tree-2').find('#tnode-1-1-2').treegrid('removeNode');
+    equal($('#tree-2').treegrid('getAllNodes').length, 9, "9");
+
+    $('#tree-2').treegrid('attachNode', $branchNode);
+    equal($('#tree-2').treegrid('getAllNodes').length, 10, "10");
+
+    $('#tree-2').treegrid('attachNode', $leafNode);
+    equal($('#tree-2').treegrid('getAllNodes').length, 11, "11");
+
+});

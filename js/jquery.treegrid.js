@@ -38,6 +38,51 @@
             });
         },
         /**
+         * Attach node
+         * 
+         * @param {HtmlElement|String|Object} node
+         * @returns {Object[]}
+         */
+        attachNode: function(node) {
+            return this.each(function() {
+                var $this = $(this);
+                var $node = $(node);
+                var $insertion;
+                var parentIndex = $this.treegrid('getSetting', 'getParentNodeId').apply($node);
+                if (parentIndex !== null) {
+                    $insertion = $this.treegrid('getSetting', 'getNodeById').apply(this, [parentIndex, $this.treegrid('getTreeContainer')]);
+                } else {
+                    $insertion = $this.find('tbody:last');
+                    if ($insertion.length != 0) {
+                        $this = $insertion;
+                    }
+                    $insertion = $this.find('tr:last');
+                }
+                if ($insertion.length != 0) {
+                    $node.insertAfter($insertion).treegrid('initExpander').treegrid('initIndent').treegrid('initEvents').treegrid('initState').treegrid("initSettingsEvents");
+                    $node.treegrid('getParentNode').treegrid('expand');
+                }
+            });
+        },
+        /**
+         * Remove node
+         * 
+         * @returns {Object[]}
+         */
+        removeNode: function() {
+            return this.each(function() {
+                var $this = $(this);
+                var $parent = $this.treegrid('getParentNode');
+                $this.treegrid('getChildNodes').remove();
+                $this.remove();
+                if ($parent.treegrid('getChildNodes').length == 0) {
+                    $parent.trigger("collapse").treegrid('getSetting', 'getExpander').apply($parent)
+                        .removeClass($parent.treegrid('getSetting', 'expanderCollapsedClass'))
+                        .removeClass($parent.treegrid('getSetting', 'expanderExpandedClass'));
+                }
+            });
+        },
+        /**
          * Initialize node events
          * 
          * @returns {Node}
@@ -230,7 +275,11 @@
          * @returns {HtmlElement}
          */
         getTreeContainer: function() {
-            return $(this).data('treegrid');
+            if ($(this).is("table")) {
+                return $(this).data('treegrid');
+            } else {
+                return $(this).closest('table').data('treegrid');
+            }
         },
         /**
          * Set tree container
