@@ -70,10 +70,19 @@
          * @returns {Object[]}
          */
         removeNode: function() {
+            var removeChildren = function($e) {
+                $e.treegrid('getChildNodes').each(function(i,v) {
+                    var $v = $(v);
+                    removeChildren($v);
+                    $v.treegrid('getChildNodes').remove();
+                });
+                $e.treegrid('getChildNodes').remove();
+            }
+
             return this.each(function() {
                 var $this = $(this);
                 var $parent = $this.treegrid('getParentNode');
-                $this.treegrid('getChildNodes').remove();
+                removeChildren($this);
                 $this.remove();
                 if ($parent.treegrid('getChildNodes').length == 0) {
                     $parent.trigger("collapse").treegrid('getSetting', 'getExpander').apply($parent)
