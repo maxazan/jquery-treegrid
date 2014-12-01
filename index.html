@@ -402,8 +402,23 @@ $('.tree').find('tr').each(function(){
                     <td>
                         <pre><code class="javascript">$('#node-2').treegrid('render');</code></pre>
                     </td>
-                </tr> 
-
+                </tr>
+                <tr>
+                    <td>attachNode</td>
+                    <td>Attach node, set it up and render it</td>
+                    <td>
+                        <pre><code class="javascript">$('#tree').treegrid('attachNode',
+  $('&lt;tr class="treegrid-5"&gt;' +
+    '&lt;td&gt;Node 1-2-1&lt;/td&gt;&lt;td&gt;Additional info&lt;/td&gt;&lt;/tr&gt;'));</code></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>removeNode</td>
+                    <td>Remove node then redraw parent node</td>
+                    <td>
+                        <pre><code class="javascript">$('#node-2').treegrid('removeNode');</code></pre>
+                    </td>
+                </tr>
 
             </table>
             <h3>Events</h3>
