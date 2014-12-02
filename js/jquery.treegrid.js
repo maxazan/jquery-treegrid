@@ -125,8 +125,11 @@
         initIndent: function() {
             var $this = $(this);
             $this.find('.treegrid-indent').remove();
-            for (var i = 0; i < $(this).treegrid('getDepth'); i++) {
-                $($this.treegrid('getSetting', 'indentTemplate')).insertBefore($this.find('.treegrid-expander'));
+            var tmpl = $($this.treegrid('getSetting', 'indentTemplate'));
+            var expander = $this.find('.treegrid-expander');
+            var depth = $this.treegrid('getDepth');
+            for (var i = 0; i < depth; i++) {
+                tmpl.insertBefore(expander);
             }
             return $this;
         },
