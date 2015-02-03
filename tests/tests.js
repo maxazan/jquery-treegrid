@@ -174,21 +174,15 @@ test("Event collapse/expand", function() {
 test("Event change", function() {
     var count = 0;
     $('#tree-4').find('#anode-1').treegrid("collapse");
-    $('#tree-4').treegrid("getAllNodes").on("change", function(event) {
-        console.log('IN');
+    var func=function(event) {
         count++;
-    });
+    };
+    $('#tree-4').treegrid("getAllNodes").on("change", func);
     $('#tree-4').find('#anode-1').treegrid("expand");
     $('#tree-4').find('#anode-1').treegrid("collapse");
     $('#tree-4').find('#anode-1').treegrid("expand");
     $('#tree-4').find('#anode-1').treegrid("collapse");
+    $('#tree-4').treegrid("getAllNodes").off("change", func);
 
     equal(count, 4);
-});
-
-test("Global Events test", function() {
-    var count = globalCounter;
-    $('#tree-4').find('#anode-1').treegrid("expand");
-    $('#tree-4').find('#anode-1').treegrid("collapse");
-    equal(globalCounter, count + 4);
 });

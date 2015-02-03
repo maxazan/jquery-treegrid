@@ -1,3 +1,10 @@
+== 0.3.0 - 03 February 2015
+* Perfomance optimization
+* Bootstrap 3 update
+* Add minifiyed js
+* Add npm installation
+* Add borew installation
+
 == 0.2.1 - 21 January 2014
 * Add events support
 
