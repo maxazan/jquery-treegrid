@@ -513,11 +513,21 @@
         render: function() {
             return $(this).each(function() {
                 var $this = $(this);
+                var anim = ($this.treegrid('getSetting', 'animate') === true);
+                // If we want to be able have our rows slide, we need to wrap all cell contents in a new DIV
+                if (anim && !$this.data('tree-grid-init-done')) {
+                    $this.find('td').wrapInner('<div class="tree-grid-anim"></div>');
+                    $this.data('tree-grid-init-done', 1);
+                }
                 //if parent colapsed we hidden
                 if ($this.treegrid('isOneOfParentsCollapsed')) {
-                    $this.hide();
+                    if (anim) $this.find('div.tree-grid-anim').slideUp(400, function() {
+                        $this.hide();
+                    });
+                    else $this.hide();
                 } else {
                     $this.show();
+                    if (anim) $this.find('div.tree-grid-anim').slideDown();
                 }
                 if (!$this.treegrid('isLeaf')) {
                     $this.treegrid('renderExpander');
@@ -563,6 +573,7 @@
      *  Plugin's default options
      */
     $.fn.treegrid.defaults = {
+        animate: false,
         initialState: 'expanded',
         saveState: false,
         saveStateMethod: 'cookie',
