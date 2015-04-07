@@ -117,7 +117,7 @@
             if (expander) {
                 expander.remove();
             }
-            $(tpl).prependTo(cell).click(function() {
+            $(tpl).prependTo(cell).addClass($this.treegrid('getSetting', 'expanderLeafClass')).click(function() {
                 $($(this).closest('tr')).treegrid('toggle');
             });
             return $this;
@@ -535,7 +535,7 @@
                 var $this = $(this);
                 var expander = $this.treegrid('getSetting', 'getExpander').apply(this);
                 if (expander) {
-
+                    expander.removeClass($this.treegrid('getSetting', 'expanderLeafClass'));
                     if (!$this.treegrid('isCollapsed')) {
                         expander.removeClass($this.treegrid('getSetting', 'expanderCollapsedClass'));
                         expander.addClass($this.treegrid('getSetting', 'expanderExpandedClass'));
@@ -571,6 +571,7 @@
         indentTemplate: '<span class="treegrid-indent"></span>',
         expanderExpandedClass: 'treegrid-expander-expanded',
         expanderCollapsedClass: 'treegrid-expander-collapsed',
+        expanderLeafClass: 'tree-grid-expander-leaf',
         treeColumn: 0,
         getExpander: function() {
             return $(this).find('.treegrid-expander');
