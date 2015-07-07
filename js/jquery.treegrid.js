@@ -1,5 +1,5 @@
 /*
- * jQuery treegrid Plugin 0.2.0
+ * jQuery treegrid Plugin 0.3.0
  * https://github.com/maxazan/jquery-treegrid
  *
  * Copyright 2013, Pomazan Max
