@@ -15,6 +15,17 @@
     "test.html",
     "treegrid.jquery.json"
   ],
+  "main": [
+    "css/jquery.treegrid.css",
+    "js/jquery.cookie.js",
+    "js/jquery.treegrid.bootstrap2.js",
+    "js/jquery.treegrid.bootstrap3.js",
+    "js/jquery.treegrid.js",
+    "img/collapse.png",
+    "img/expand.png",
+    "img/file.png",
+    "img/folder.png"
+  ],
   "keywords": [
     "jquery",
     "javascript",
