@@ -21,9 +21,6 @@
                 $this.treegrid('setTreeContainer', $(this));
                 $this.treegrid('setSettings', settings);
                 settings.getRootNodes.apply(this, [$(this)]).treegrid('initNode', settings);
-                $this.treegrid('getAllNodes').each(function() {
-                    $(this).attr('id', 'treegrid-' + $(this).treegrid('getNodeId'));
-                });
                 $this.treegrid('getRootNodes').treegrid('render');
             });
         },
@@ -37,6 +34,7 @@
             return this.each(function() {
                 var $this = $(this);
                 $this.treegrid('setTreeContainer', settings.getTreeGridContainer.apply(this));
+                $this.attr('id', 'treegrid-' + $(this).treegrid('getNodeId'));
                 $this.treegrid('getChildNodes').treegrid('initNode', settings);
                 $this.treegrid('initExpander').treegrid('initIndent').treegrid('initEvents').treegrid('initState').treegrid('initChangeEvent').treegrid("initSettingsEvents");
             });
