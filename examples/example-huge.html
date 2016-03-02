@@ -15,9 +15,8 @@
       	//create huge treetable
       	var count_root_elements=100;
       	var count_deep=10;
-      	console.log('init');
+      	console.log('generate...');
       	for(var i=0; i<count_root_elements; i++){
-      		console.log('add');
       		var tr=$("<tr></tr>").addClass("treegrid-"+i+"-0").appendTo($('.tree')).html("<td>Root node "+i+"</td><td>Additional info</td>");
 
 	      	for(var j=1; j<count_deep; j++){
@@ -25,12 +24,15 @@
 	      	}
       	}
 
+        console.log('init...');
+        console.profile('treegrid init');
         $('.tree').treegrid();
+        console.profileEnd();
       });
     </script>
 
 
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -38,14 +40,14 @@
   </head>
   <body>
     <div class="wrapper">
-	  
+
 
       <h1><a href="http://maxazan.github.io/jquery-treegrid/">TreeGrid</a> Big data example</h1>
 
-      <table class="tree"></table>	  
+      <table class="tree"></table>
 
       <h2>Code</h2>
-        
+
       <pre>
 <code class='html'>
 &lt;!doctype html&gt;
@@ -81,7 +83,7 @@
         &lt;tr class=&quot;treegrid-4 treegrid-parent-3&quot;&gt;
           &lt;td&gt;Node 1-2-1&lt;/td&gt;&lt;td&gt;Additional info&lt;/td&gt;
         &lt;/tr&gt;
-      &lt;/table&gt;	  
+      &lt;/table&gt;
 
   &lt;/body&gt;
 &lt;/html&gt;
