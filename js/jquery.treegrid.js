@@ -43,7 +43,6 @@
             //Save state on change
             $this.on("change", function() {
                 var $this = $(this);
-                $this.treegrid('render');
                 if ($this.treegrid('getSetting', 'saveState')) {
                     $this.treegrid('saveState');
                 }
@@ -424,10 +423,28 @@
         expand: function() {
             if (!this.treegrid('isLeaf') && !this.treegrid("isExpanded")) {
                 this.trigger("expand");
+
+                this.treegrid('renderExpander');
+                this.treegrid('getChildNodes').treegrid('show');
+
                 this.trigger("change");
                 return this;
             }
             return this;
+        },
+        /**
+         * Show subtree
+         *
+         * @returns {Node}
+         */
+        show: function() {
+            return $(this).each(function() {
+                var $this = $(this);
+                $this.show();
+                if ($this.treegrid('isExpanded')) {
+                    $this.treegrid('getChildNodes').treegrid('show');
+                }
+            });
         },
         /**
          * Expand all nodes
@@ -463,7 +480,25 @@
                 var $this = $(this);
                 if (!$this.treegrid('isLeaf') && !$this.treegrid("isCollapsed")) {
                     $this.trigger("collapse");
+
+                    $this.treegrid('renderExpander');
+                    $this.treegrid('getChildNodes').treegrid('hide');
+
                     $this.trigger("change");
+                }
+            });
+        },
+        /**
+         * Hide subtree
+         *
+         * @returns {Node}
+         */
+        hide: function() {
+            return $(this).each(function() {
+                var $this = $(this);
+                $this.hide();
+                if ($this.treegrid('isExpanded')) {
+                    $this.treegrid('getChildNodes').treegrid('hide');
                 }
             });
         },
