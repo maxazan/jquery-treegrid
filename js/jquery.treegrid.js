@@ -43,7 +43,6 @@
             //Save state on change
             $this.on("change", function() {
                 var $this = $(this);
-                $this.treegrid('render');
                 if ($this.treegrid('getSetting', 'saveState')) {
                     $this.treegrid('saveState');
                 }
@@ -223,6 +222,22 @@
                 return null;
             }
             return $(this).treegrid('getTreeContainer').data('settings')[name];
+        },
+        /**
+         * Set setting by name
+         *
+         * @param {type} name
+         * @param {type} value
+         *
+         * @returns {Node}
+         */
+        setSetting: function(name, value) {
+            var $this = $(this);
+            if (!$this.treegrid('getTreeContainer')) {
+                return $this;
+            }
+            $this.treegrid('getTreeContainer').data('settings')[name] = value;
+            return $this;
         },
         /**
          * Add new settings
@@ -424,10 +439,32 @@
         expand: function() {
             if (!this.treegrid('isLeaf') && !this.treegrid("isExpanded")) {
                 this.trigger("expand");
+
+                this.treegrid('renderExpander');
+                this.treegrid('getChildNodes').treegrid('show');
+
                 this.trigger("change");
                 return this;
             }
             return this;
+        },
+        /**
+         * Show subtree
+         *
+         * @returns {Node}
+         */
+        show: function() {
+            return $(this).each(function() {
+                var $this = $(this);
+                if (!$this.treegrid('getSetting', 'filter') ||
+                    $this.treegrid('isMarkedMatched')
+                ) {
+                    $this.show();
+                    if ($this.treegrid('isExpanded')) {
+                        $this.treegrid('getChildNodes').treegrid('show');
+                    }
+                }
+            });
         },
         /**
          * Expand all nodes
@@ -463,7 +500,25 @@
                 var $this = $(this);
                 if (!$this.treegrid('isLeaf') && !$this.treegrid("isCollapsed")) {
                     $this.trigger("collapse");
+
+                    $this.treegrid('renderExpander');
+                    $this.treegrid('getChildNodes').treegrid('hide');
+
                     $this.trigger("change");
+                }
+            });
+        },
+        /**
+         * Hide subtree
+         *
+         * @returns {Node}
+         */
+        hide: function() {
+            return $(this).each(function() {
+                var $this = $(this);
+                $this.hide();
+                if ($this.treegrid('isExpanded')) {
+                    $this.treegrid('getChildNodes').treegrid('hide');
                 }
             });
         },
@@ -517,7 +572,11 @@
                 if ($this.treegrid('isOneOfParentsCollapsed')) {
                     $this.hide();
                 } else {
-                    $this.show();
+                    if (!$this.treegrid('getSetting', 'filter') ||
+                        $this.treegrid('isMarkedMatched')
+                    ) {
+                        $this.show();
+                    }
                 }
                 if (!$this.treegrid('isLeaf')) {
                     $this.treegrid('renderExpander');
@@ -535,7 +594,6 @@
                 var $this = $(this);
                 var expander = $this.treegrid('getSetting', 'getExpander').apply(this);
                 if (expander) {
-
                     if (!$this.treegrid('isCollapsed')) {
                         expander.removeClass($this.treegrid('getSetting', 'expanderCollapsedClass'));
                         expander.addClass($this.treegrid('getSetting', 'expanderExpandedClass'));
@@ -548,6 +606,91 @@
                     $this.treegrid('renderExpander');
                 }
             });
+        },
+
+        /**
+         * Filter tree by string.
+         * Show only branches that have nodes that match the search string.
+         *
+         * @returns {Node}
+         */
+        filterAll: function(filterString) {
+            var $this = $(this);
+            $this
+                .treegrid('setSetting', 'filter', filterString)
+                .treegrid('getRootNodes')
+                .treegrid('filterRecursive', filterString, false);
+            return $this;
+        },
+        /**
+         * Filter subtrees by string.
+         * Show only branches that have nodes that match the search string.
+         *
+         * @returns {Boolean}
+         */
+        filterRecursive: function(filterString, parentMatched) {
+            var matched = false;
+            $(this).each(function() {
+                var $this = $(this);
+
+                var thisMatched = parentMatched || $this.treegrid('isMatched', filterString);
+                if (!$this.treegrid('isLeaf')) {
+                    thisMatched = $this.treegrid('getChildNodes').treegrid('filterRecursive', filterString, thisMatched) || thisMatched;
+                }
+
+                if (thisMatched) {
+                    $this.treegrid('markMatched');
+                    if (!$this.treegrid('isOneOfParentsCollapsed')) {
+                        $this.show();
+                    }
+
+                } else {
+                    $this.treegrid('unmarkMatched');
+                    $this.hide();
+                }
+                matched = matched || thisMatched;
+            });
+            return matched;
+        },
+        /**
+         * Return true if the node matches the search string
+         *
+         * @returns {Boolean}
+         */
+        isMatched: function(searchString) {
+            if (!searchString) {
+                return true;
+            }
+            var $this = $(this);
+            var cell = $this.find('td').get($this.treegrid('getSetting', 'treeColumn'));
+            return $(cell).filter(":contains('" + searchString.replace(/'/g, "\\'") + "')").length > 0;
+        },
+        /**
+         * Mark node as matched to the filter
+         *
+         * @returns {Boolean}
+         */
+        markMatched: function() {
+            var $this = $(this);
+            $this.addClass('treegrid-matched');
+        },
+        /**
+         * Is node marked as matched to the filter
+         *
+         * @returns {Boolean}
+         */
+        isMarkedMatched: function() {
+            var $this = $(this);
+            return $this.hasClass('treegrid-matched');
+        },
+        /**
+         * Mark node as not matched to the filter
+         *
+         * @returns {Boolean}
+         */
+        unmarkMatched: function() {
+            var $this = $(this);
+            $this.removeClass('treegrid-matched');
         }
     };
     $.fn.treegrid = function(method) {
@@ -572,6 +715,7 @@
         expanderExpandedClass: 'treegrid-expander-expanded',
         expanderCollapsedClass: 'treegrid-expander-collapsed',
         treeColumn: 0,
+        filter: null,
         getExpander: function() {
             return $(this).find('.treegrid-expander');
         },
