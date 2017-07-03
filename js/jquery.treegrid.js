@@ -144,16 +144,21 @@
          * @returns {Node}
          */
         initState: function() {
-            var $this = $(this);
+            var $this = $(this),
+                initialState = '';
+
             if ($this.treegrid('getSetting', 'saveState') && !$this.treegrid('isFirstInit')) {
                 $this.treegrid('restoreState');
             } else {
-                if ($this.treegrid('getSetting', 'initialState') === "expanded") {
+                initialState = $this.treegrid('getSetting', 'initialState');
+
+                if (initialState === "expanded") {
                     $this.treegrid('expand');
-                } else {
+                } else if (initialState === "collapse") {
                     $this.treegrid('collapse');
                 }
             }
+            
             return $this;
         },
         /**
