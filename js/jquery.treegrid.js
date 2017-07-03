@@ -34,6 +34,7 @@
             return this.each(function() {
                 var $this = $(this);
                 $this.treegrid('setTreeContainer', settings.getTreeGridContainer.apply(this));
+                $this.attr('id', 'treegrid-' + $(this).treegrid('getNodeId'));
                 $this.treegrid('getChildNodes').treegrid('initNode', settings);
                 $this.treegrid('initExpander').treegrid('initIndent').treegrid('initEvents').treegrid('initState').treegrid('initChangeEvent').treegrid("initSettingsEvents");
             });
@@ -560,6 +561,11 @@
         }
     };
     /**
+     * Pre-init RegExp objects
+     */
+    var templateClass = /treegrid-([\w-]+)/,
+        templateParentClass = /treegrid-parent-([\w-]+)/;
+    /**
      *  Plugin's default options
      */
     $.fn.treegrid.defaults = {
@@ -576,22 +582,16 @@
             return $(this).find('.treegrid-expander');
         },
         getNodeId: function() {
-            var template = /treegrid-([A-Za-z0-9_-]+)/;
-            if (template.test($(this).attr('class'))) {
-                return template.exec($(this).attr('class'))[1];
-            }
-            return null;
+            var result = templateClass.exec($(this).attr('class'));
+            return result ? result[1] : null;
         },
         getParentNodeId: function() {
-            var template = /treegrid-parent-([A-Za-z0-9_-]+)/;
-            if (template.test($(this).attr('class'))) {
-                return template.exec($(this).attr('class'))[1];
-            }
-            return null;
+            var result = templateParentClass.exec($(this).attr('class'));
+            return result ? result[1] : null;
         },
         getNodeById: function(id, treegridContainer) {
             var templateClass = "treegrid-" + id;
-            return treegridContainer.find('tr.' + templateClass);
+            return treegridContainer.find('#' + templateClass);
         },
         getChildNodes: function(id, treegridContainer) {
             var templateClass = "treegrid-parent-" + id;
@@ -603,17 +603,13 @@
         getRootNodes: function(treegridContainer) {
             var result = $.grep(treegridContainer.find('tr'), function(element) {
                 var classNames = $(element).attr('class');
-                var templateClass = /treegrid-([A-Za-z0-9_-]+)/;
-                var templateParentClass = /treegrid-parent-([A-Za-z0-9_-]+)/;
                 return templateClass.test(classNames) && !templateParentClass.test(classNames);
             });
             return $(result);
         },
         getAllNodes: function(treegridContainer) {
             var result = $.grep(treegridContainer.find('tr'), function(element) {
-                var classNames = $(element).attr('class');
-                var templateClass = /treegrid-([A-Za-z0-9_-]+)/;
-                return templateClass.test(classNames);
+                return templateClass.test($(element).attr('class'));
             });
             return $(result);
         },
